@@ -14,35 +14,37 @@ public class Selenium {
         System.setProperty("webdriver.chrome.driver", "D:\\ggez\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get(" https://www.avito.ru/");
+        System.out.println("захожу на сайт авито ");
         driver.manage().window().maximize();
+        System.out.println("Делаю окно на весь экран");
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        System.out.println("добавляю время ожидания отклика элемента");
         Select category = new Select(driver.findElement(By.id("category")));
-
-// category.getOptions().forEach(option->{
-// System.out.println("Value"+option.getAttribute("value ")+":Text="+option.getText());
-
-// });
         category.selectByValue("99");
+        System.out.println("создаю элемент списка и выбираю нужную мне категорию в списке");
         driver.findElement(By.id("search")).sendKeys("Принтер");
+        System.out.println("ввожу в поисковую строку 'Принтер'");
         WebElement clickGorod = driver.findElement(By.xpath("//div[@class='main-text-2PaZG']"));
         clickGorod.click();
+        System.out.println("Кликаю по кнопке,для ввода нужного города");
         WebElement gorod = driver.findElement(By.xpath("//input[@class='suggest-input-3p8yi']"));
         gorod.sendKeys("Владивосток");
+        System.out.println("Ввожу нужный мне город");
         WebElement ckickFirstItem = driver.findElement(By.xpath("//li[@data-marker='suggest(0)']"));
         ckickFirstItem.click();
         driver.findElement(By.xpath("//button[@data-marker='popup-location/save-button']")).click();
-//        WebElement element = driver.findElement(By.xpath("//div[contains(@data-marker,'delivery')]//label[contains(@class,'checkbox')]"));
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-//        element.click();
+        System.out.println("Выбираю и кликаю на первый элемент из списка, и кликаю по поиску");
         WebElement checkbox = driver.findElement(By.xpath("//div[contains(@data-marker,'delivery')]//label[contains(@class,'checkbox')]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
         if (!checkbox.isSelected()) {
             checkbox.click();
         }
+        System.out.println("Проверяю активировано ли поле чекбокса и кликаю по нему");
         driver.findElement(By.xpath("//button[@data-marker='search-filters/submit-button']")).click();
+        System.out.println("кликаю по поиску");
         Select doroje=new Select(driver.findElement(By.xpath("//div[@class='sort-select-3QxXG select-select-box-3LBfK select-size-s-2gvAy']//select[@class='select-select-3CHiM']")));
         doroje.selectByValue("2");
-        //div[@class='items-items-38oUm']/div[@data-marker='item']
+        System.out.println("Выбираю из сортировки списка, сначала чтоб шли самые дорогие");
         List<WebElement> webElementsList=driver.findElements(By.xpath("//div[@class='items-items-38oUm']/div[@data-marker='item']"));
         {
             for (int i = 0; i < 3; i++) {
@@ -51,6 +53,7 @@ public class Selenium {
 
             }
         }
+        System.out.println("Создаю лист всех принтеров на странице , а пототм выбираю 3 самых первых элемента с выводом их цены и названия");
 
 
 
